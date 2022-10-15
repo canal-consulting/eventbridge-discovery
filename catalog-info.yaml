@@ -8,6 +8,6 @@ metadata:
     backstage.io/techdocs-ref: dir:.
     github.com/project-slug: canal-consulting/eventbridge-discovery
 spec:
-  type: infrastructure
+  type: cdk-construct
   owner: ml-ops
   lifecycle: experimental
