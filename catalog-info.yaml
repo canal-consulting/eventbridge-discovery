@@ -7,13 +7,13 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:.
     github.com/project-slug: canal-consulting/eventbridge-discovery
+  links:
+    - url: https://github.com/canal-consulting/mlops-infrastructure
+      title: Deployed Infrastructure
+      icon: activity_zone
 spec:
   type: cdk-construct
   owner: ml-ops
   lifecycle: experimental
   partOf:
     - system:mlops-infrastructure
-links:
-  - url: https://github.com/canal-consulting/mlops-infrastructure
-    title: Deployed Infrastructure
-    icon: activity_zone
