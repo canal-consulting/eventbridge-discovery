@@ -11,7 +11,9 @@ spec:
   type: cdk-construct
   owner: ml-ops
   lifecycle: experimental
-  links:
-    - url: https://github.com/canal-consulting/mlops-infrastructure
-      title: Deployed Infrastructure
-      icon: activity_zone
+  partOf:
+    - system:mlops-infrastructure
+links:
+  - url: https://github.com/canal-consulting/mlops-infrastructure
+    title: Deployed Infrastructure
+    icon: activity_zone
