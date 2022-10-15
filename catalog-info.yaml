@@ -14,9 +14,7 @@ metadata:
       title: Deployed Infrastructure
       icon: activity_zone
 spec:
-  type: library
+  type: service
   owner: ml-ops
   lifecycle: experimental
-  system:
-  subcomponentOf:
-    - system:mlops-infrastructure
+  system: mlops-infrastructure
