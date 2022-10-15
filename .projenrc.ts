@@ -9,7 +9,7 @@ const deps = [`aws-cdk-lib@${cdkVersion}`, 'constructs@10.0.5', `@aws-cdk/aws-la
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Bryan Galvin',
-  authorAddress: 'bcgalvin@gmail.com',
+  authorAddress: 'bryan.galvin@bestegg.com',
   cdkVersion: cdkVersion,
   defaultReleaseBranch: 'main',
   name: 'eventbridge-discovery',
