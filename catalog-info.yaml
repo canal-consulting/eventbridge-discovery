@@ -2,6 +2,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: eventbridge-discovery
+  namespace: infrastructure
+  title: Eventbridge Discovery Service
   description: |
     Reference architecture for creating a versioned schema from discovery on an event bus
   annotations:
@@ -12,8 +14,9 @@ metadata:
       title: Deployed Infrastructure
       icon: activity_zone
 spec:
-  type: cdk-construct
+  type: library
   owner: ml-ops
   lifecycle: experimental
-  partOf:
+  system:
+  subcomponentOf:
     - system:mlops-infrastructure
