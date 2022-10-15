@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: eventbridge-discovery
+  description: Eventbridge Schema Discovery
+  annotations:
+    'backstage.io/techdocs-ref': dir:.
+spec:
+  owner: ml-ops
+  domain: infrastructure.yaml

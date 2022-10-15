@@ -5,6 +5,7 @@
     ".github/workflows/build.yml",
     ".github/workflows/upgrade.yml",
     ".gitignore",
+    ".nvmrc",
     ".prettierignore",
     ".prettierrc.json",
     ".projen/deps.json",

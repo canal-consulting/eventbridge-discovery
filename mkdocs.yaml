@@ -1,0 +1,8 @@
+site_name: "Eventbridge Discovery"
+site_description: "Reference architecture for creating a versioned schema from discovery on an event bus"
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core
