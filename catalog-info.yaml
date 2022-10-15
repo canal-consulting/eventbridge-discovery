@@ -1,10 +1,13 @@
 apiVersion: backstage.io/v1alpha1
-kind: System
+kind: Component
 metadata:
   name: eventbridge-discovery
-  description: Eventbridge Schema Discovery
+  description: |
+    Reference architecture for creating a versioned schema from discovery on an event bus
   annotations:
-    'backstage.io/techdocs-ref': dir:.
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: canal-consulting/eventbridge-discovery
 spec:
+  type: infrastructure
   owner: ml-ops
-  domain: infrastructure.yaml
+  lifecycle: experimental
