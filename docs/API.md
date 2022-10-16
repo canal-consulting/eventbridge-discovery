@@ -93,6 +93,7 @@ Any object.
 | --- | --- | --- |
 | <code><a href="#eventbridge-discovery.EventBridgeDiscovery.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
 | <code><a href="#eventbridge-discovery.EventBridgeDiscovery.property.eventBucket">eventBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
+| <code><a href="#eventbridge-discovery.EventBridgeDiscovery.property.eventBus">eventBus</a></code> | <code>aws-cdk-lib.aws_events.IEventBus</code> | *No description.* |
 
 ---
 
@@ -115,6 +116,16 @@ public readonly eventBucket: IBucket;
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.IBucket
+
+---
+
+##### `eventBus`<sup>Required</sup> <a name="eventBus" id="eventbridge-discovery.EventBridgeDiscovery.property.eventBus"></a>
+
+```typescript
+public readonly eventBus: IEventBus;
+```
+
+- *Type:* aws-cdk-lib.aws_events.IEventBus
 
 ---
 
