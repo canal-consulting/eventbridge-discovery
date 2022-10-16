@@ -51,4 +51,13 @@ junit.xml
 .jsii
 tsconfig.json
 !/docs/API.md
+test/.tmp
+test/eventbridge-discovery.integ.snapshot/asset.*
+test/eventbridge-discovery.integ.snapshot/**/asset.*
+test/eventbridge-discovery.integ.snapshot/cdk.out
+test/eventbridge-discovery.integ.snapshot/**/cdk.out
+test/eventbridge-discovery.integ.snapshot/manifest.json
+test/eventbridge-discovery.integ.snapshot/**/manifest.json
+test/eventbridge-discovery.integ.snapshot/tree.json
+test/eventbridge-discovery.integ.snapshot/**/tree.json
 !/.nvmrc

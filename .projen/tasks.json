@@ -113,6 +113,78 @@
         }
       ]
     },
+    "integ:eventbridge-discovery:assert": {
+      "name": "integ:eventbridge-discovery:assert",
+      "description": "assert the snapshot of integration test 'eventbridge-discovery'",
+      "steps": [
+        {
+          "exec": "[ -d \"test/eventbridge-discovery.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'eventbridge-discovery'. Run 'projen integ:eventbridge-discovery:deploy' to capture.\" && exit 1)"
+        },
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/eventbridge-discovery.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/.tmp/eventbridge-discovery.integ/assert.cdk.out > /dev/null"
+        },
+        {
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/eventbridge-discovery.integ.snapshot/ test/.tmp/eventbridge-discovery.integ/assert.cdk.out/"
+        }
+      ]
+    },
+    "integ:eventbridge-discovery:deploy": {
+      "name": "integ:eventbridge-discovery:deploy",
+      "description": "deploy integration test 'eventbridge-discovery' and capture snapshot",
+      "steps": [
+        {
+          "exec": "rm -fr test/.tmp/eventbridge-discovery.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/eventbridge-discovery.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/.tmp/eventbridge-discovery.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "rm -fr test/eventbridge-discovery.integ.snapshot"
+        },
+        {
+          "exec": "mv test/.tmp/eventbridge-discovery.integ/deploy.cdk.out test/eventbridge-discovery.integ.snapshot"
+        },
+        {
+          "spawn": "integ:eventbridge-discovery:destroy"
+        }
+      ]
+    },
+    "integ:eventbridge-discovery:destroy": {
+      "name": "integ:eventbridge-discovery:destroy",
+      "description": "destroy integration test 'eventbridge-discovery'",
+      "steps": [
+        {
+          "exec": "cdk destroy --app test/eventbridge-discovery.integ.snapshot '**' --no-version-reporting"
+        }
+      ]
+    },
+    "integ:eventbridge-discovery:snapshot": {
+      "name": "integ:eventbridge-discovery:snapshot",
+      "description": "update snapshot for integration test \"eventbridge-discovery\"",
+      "steps": [
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/eventbridge-discovery.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/eventbridge-discovery.integ.snapshot > /dev/null"
+        }
+      ]
+    },
+    "integ:eventbridge-discovery:watch": {
+      "name": "integ:eventbridge-discovery:watch",
+      "description": "watch integration test 'eventbridge-discovery' (without updating snapshots)",
+      "steps": [
+        {
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/eventbridge-discovery.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/.tmp/eventbridge-discovery.integ/deploy.cdk.out"
+        }
+      ]
+    },
+    "integ:snapshot-all": {
+      "name": "integ:snapshot-all",
+      "description": "update snapshot for all integration tests",
+      "steps": [
+        {
+          "spawn": "integ:eventbridge-discovery:snapshot"
+        }
+      ]
+    },
     "package": {
       "name": "package",
       "description": "Creates the distribution package",
@@ -166,6 +238,9 @@
         },
         {
           "spawn": "eslint"
+        },
+        {
+          "spawn": "integ:eventbridge-discovery:assert"
         }
       ]
     },
