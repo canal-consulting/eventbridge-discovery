@@ -50,6 +50,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   dependabot: false,
   autoMerge: false,
   docgen: true,
+  docgenFilePath: 'docs/API.md',
   catalog: { announce: false },
   // Ignore files
   gitignore: commonIgnore,
