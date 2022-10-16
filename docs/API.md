@@ -92,8 +92,8 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#eventbridge-discovery.EventBridgeDiscovery.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#eventbridge-discovery.EventBridgeDiscovery.property.eventBucket">eventBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
-| <code><a href="#eventbridge-discovery.EventBridgeDiscovery.property.eventBus">eventBus</a></code> | <code>aws-cdk-lib.aws_events.IEventBus</code> | *No description.* |
+| <code><a href="#eventbridge-discovery.EventBridgeDiscovery.property.eventBucket">eventBucket</a></code> | <code>aws-cdk-lib.aws_s3.Bucket</code> | *No description.* |
+| <code><a href="#eventbridge-discovery.EventBridgeDiscovery.property.eventBus">eventBus</a></code> | <code>aws-cdk-lib.aws_events.EventBus</code> | *No description.* |
 
 ---
 
@@ -112,20 +112,20 @@ The tree node.
 ##### `eventBucket`<sup>Required</sup> <a name="eventBucket" id="eventbridge-discovery.EventBridgeDiscovery.property.eventBucket"></a>
 
 ```typescript
-public readonly eventBucket: IBucket;
+public readonly eventBucket: Bucket;
 ```
 
-- *Type:* aws-cdk-lib.aws_s3.IBucket
+- *Type:* aws-cdk-lib.aws_s3.Bucket
 
 ---
 
 ##### `eventBus`<sup>Required</sup> <a name="eventBus" id="eventbridge-discovery.EventBridgeDiscovery.property.eventBus"></a>
 
 ```typescript
-public readonly eventBus: IEventBus;
+public readonly eventBus: EventBus;
 ```
 
-- *Type:* aws-cdk-lib.aws_events.IEventBus
+- *Type:* aws-cdk-lib.aws_events.EventBus
 
 ---
 
