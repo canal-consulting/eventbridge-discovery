@@ -35,7 +35,6 @@
     "@types/node": "^14",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
-    "aws-cdk-lib": "2.46.0",
     "eslint": "^8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-node": "^0.3.6",
@@ -58,12 +57,11 @@
   },
   "peerDependencies": {
     "aws-cdk-lib": "^2.46.0",
-    "constructs": "^10.0.5"
+    "constructs": "^10.1.131"
   },
   "dependencies": {
-    "@aws-cdk/aws-lambda-go-alpha": "2.46.0-alpha.0",
     "aws-cdk-lib": "2.46.0",
-    "constructs": "10.0.5"
+    "constructs": "10.1.131"
   },
   "keywords": [
     "cdk"
