@@ -3,6 +3,7 @@ site_description: "Reference architecture for creating a versioned schema from d
 
 nav:
   - Introduction: index.md
+  - Sample Data: data.md
   - API: API.md
 
 plugins:

@@ -4,6 +4,8 @@
 .vscode
 cdk.context.json
 .DS_Store
+data/events/
+poetry.lock
 /.projen/
 /test-reports/
 junit.xml

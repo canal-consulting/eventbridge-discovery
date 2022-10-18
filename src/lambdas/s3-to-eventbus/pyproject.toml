@@ -1,0 +1,25 @@
+[tools.black]
+line-length = 160
+
+[tool.poetry]
+name = "s3-to-eventbus"
+version = "0.1.0"
+description = "Python app write to event bus from s3 putObject notification"
+authors = ["Bryan Galvin <bryan.galvin@bestegg.com>"]
+
+[tool.poetry.dependencies]
+python = "3.8.*"
+aws-lambda-powertools = "^1.31.1"
+pydantic = "^1.10.2"
+
+[tool.poetry.group.dev.dependencies]
+boto3 = "^1.24.91"
+flake8 = "^3.9.2"
+pytest = "^6.2.4"
+faker = "^15.1.1"
+black = "^22.10.0"
+isort = "^5.10.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

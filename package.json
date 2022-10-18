@@ -52,7 +52,7 @@
     "jest-junit": "^13",
     "jsii": "^1.69.0",
     "jsii-diff": "^1.69.0",
-    "jsii-docgen": "^7.0.116",
+    "jsii-docgen": "^7.0.117",
     "jsii-pacmak": "^1.69.0",
     "json-schema": "^0.4.0",
     "npm-check-updates": "^16",
@@ -67,6 +67,7 @@
     "constructs": "^10.1.131"
   },
   "dependencies": {
+    "@aws-cdk/aws-s3objectlambda-alpha": "2.46.0-alpha.0",
     "aws-cdk-lib": "2.46.0",
     "constructs": "10.1.131"
   },
