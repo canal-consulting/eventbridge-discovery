@@ -293,7 +293,7 @@
    "Properties": {
     "Code": {
      "ImageUri": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:18c6abbe031820b195d6d8a2b002293a81b720e479e33d9b4bd5e453d7bb93a4"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:c69d2aff27aafd015d9ddb19e810847c28a42d376fa12af739618976c0a43443"
      }
     },
     "Role": {
