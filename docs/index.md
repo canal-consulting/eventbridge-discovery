@@ -1,5 +1,4 @@
 # Eventbridge Discovery
 
-## Getting started
+![alt text](diagram.png "Title")
 
-## Going to production

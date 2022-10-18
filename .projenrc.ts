@@ -21,7 +21,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   projenVersion: projenVersion,
   constructsVersion: constructsVersion,
   deps: deps,
-  devDeps: ['@types/jest', '@types/node', 'eslint-config-prettier', 'eslint-plugin-prettier', 'prettier'],
+  devDeps: ['@types/jest', '@types/node', 'eslint-config-prettier', 'eslint-plugin-prettier', 'prettier', 'cdk-dia'],
   // Docs, Testing & Linting
   codeCov: true,
   eslint: true,

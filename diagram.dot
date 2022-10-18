@@ -1,0 +1,232 @@
+digraph "Diagram" {
+  splines = "ortho";
+  pad = "1.0";
+  nodesep = "0.60";
+  ranksep = "0.75";
+  fontname = "Sans-Serif";
+  fontsize = "15";
+  dpi = "200";
+  rankdir = "BT";
+  compound = "true";
+  fontcolor = "#222222";
+  edge [
+    color = "#D5871488",
+    penwidth = 2,
+    arrowhead = "dot",
+    arrowtail = "dot",
+  ];
+  node [
+    shape = "box",
+    style = "rounded",
+    fixedsize = true,
+    width = 1.7,
+    height = 1.7,
+    labelloc = "c",
+    imagescale = true,
+    fontname = "Sans-Serif",
+    fontsize = 8,
+    margin = 8,
+  ];
+  subgraph "integ-stack" {
+    subgraph "cluster-SubGraph.integ-stack" {
+      graph [
+        label = "integ-stack",
+        labelloc = "b",
+        labeljust = "l",
+        margin = "10",
+        fontsize = "16",
+        penwidth = "2",
+        pencolor = "#888888",
+        style = "filled,rounded",
+        fillcolor = "#e4e4e4",
+      ];
+      "integ-stack/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role" [
+        label = " Role",
+        fontsize = 12,
+        image = "/Users/bryan.galvin/Desktop/eventbridge-discovery/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_AWS-Identity-and-Access-Management_64@5x.png",
+        imagescale = "true",
+        imagepos = "tc",
+        penwidth = "0",
+        shape = "node",
+        fixedsize = "true",
+        labelloc = "b",
+        width = 1.2,
+        height = 1.466,
+      ];
+      subgraph "cluster-SubGraph.eb-construct" {
+        graph [
+          label = "eb-construct",
+          labelloc = "b",
+          labeljust = "l",
+          margin = "10",
+          fontsize = "16",
+          penwidth = "2",
+          pencolor = "#888888",
+          style = "filled,rounded",
+          fillcolor = "#d6d6d6",
+        ];
+        "integ-stack/eb-construct/event-bucket" [
+          label = " event-bucket",
+          fontsize = 12,
+          image = "/Users/bryan.galvin/Desktop/eventbridge-discovery/node_modules/cdk-dia/icons/aws/Service/Arch_Storage/64/Arch_Amazon-S3-Standard_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 2,
+          height = 2.266,
+        ];
+        "integ-stack/eb-construct/discovery-eventbus" [
+          label = " discovery-eventbus",
+          fontsize = 12,
+          image = "/Users/bryan.galvin/Desktop/eventbridge-discovery/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_Amazon-EventBridge_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+        "integ-stack/eb-construct/s3-to-eventbus" [
+          label = " s3-to-eventbus",
+          fontsize = 12,
+          image = "/Users/bryan.galvin/Desktop/eventbridge-discovery/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 2,
+          height = 2.266,
+        ];
+        "integ-stack/eb-construct/event-discoverer" [
+          label = " EVENTSCHEMAS\nDISCOVERER\nevent-discoverer",
+          fontsize = 12,
+        ];
+        "integ-stack/eb-construct/discovery-archive/Archive" [
+          label = " Events Archive\nArchive",
+          fontsize = 12,
+          image = "/Users/bryan.galvin/Desktop/eventbridge-discovery/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_Amazon-EventBridge_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.682,
+        ];
+        subgraph "cluster-SubGraph.schema-created-sfn" {
+          graph [
+            label = "schema-created-sfn",
+            labelloc = "b",
+            labeljust = "l",
+            margin = "10",
+            fontsize = "16",
+            penwidth = "2",
+            pencolor = "#888888",
+            style = "filled,rounded",
+            fillcolor = "#c7c7c7",
+          ];
+          "integ-stack/eb-construct/schema-created-sfn/schema" [
+            label = " schema",
+            fontsize = 12,
+            image = "/Users/bryan.galvin/Desktop/eventbridge-discovery/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_AWS-Step-Functions_64@5x.png",
+            imagescale = "true",
+            imagepos = "tc",
+            penwidth = "0",
+            shape = "node",
+            fixedsize = "true",
+            labelloc = "b",
+            width = 1.2,
+            height = 1.466,
+          ];
+          "integ-stack/eb-construct/schema-created-sfn/schema-discovery" [
+            label = " schema-discovery",
+            fontsize = 12,
+            image = "/Users/bryan.galvin/Desktop/eventbridge-discovery/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_Amazon-EventBridge_64@5x.png",
+            imagescale = "true",
+            imagepos = "tc",
+            penwidth = "0",
+            shape = "node",
+            fixedsize = "true",
+            labelloc = "b",
+            width = 1.2,
+            height = 1.466,
+          ];
+        }
+        subgraph "cluster-SubGraph.schema-version-created-sfn" {
+          graph [
+            label = "schema-version-created-sfn",
+            labelloc = "b",
+            labeljust = "l",
+            margin = "10",
+            fontsize = "16",
+            penwidth = "2",
+            pencolor = "#888888",
+            style = "filled,rounded",
+            fillcolor = "#c7c7c7",
+          ];
+          "integ-stack/eb-construct/schema-version-created-sfn/schema" [
+            label = " schema",
+            fontsize = 12,
+            image = "/Users/bryan.galvin/Desktop/eventbridge-discovery/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_AWS-Step-Functions_64@5x.png",
+            imagescale = "true",
+            imagepos = "tc",
+            penwidth = "0",
+            shape = "node",
+            fixedsize = "true",
+            labelloc = "b",
+            width = 1.2,
+            height = 1.466,
+          ];
+          "integ-stack/eb-construct/schema-version-created-sfn/schema-discovery" [
+            label = " schema-discovery",
+            fontsize = 12,
+            image = "/Users/bryan.galvin/Desktop/eventbridge-discovery/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_Amazon-EventBridge_64@5x.png",
+            imagescale = "true",
+            imagepos = "tc",
+            penwidth = "0",
+            shape = "node",
+            fixedsize = "true",
+            labelloc = "b",
+            width = 1.2,
+            height = 1.466,
+          ];
+        }
+      }
+    }
+  }
+  "integ-stack/eb-construct/event-bucket" -> "integ-stack/eb-construct/s3-to-eventbus" [
+    dir = "both",
+  ];
+  "integ-stack/eb-construct/s3-to-eventbus" -> "integ-stack/eb-construct/event-bucket" [
+    dir = "both",
+  ];
+  "integ-stack/eb-construct/s3-to-eventbus" -> "integ-stack/eb-construct/discovery-eventbus" [
+    dir = "both",
+  ];
+  "integ-stack/eb-construct/schema-created-sfn/schema-discovery" -> "integ-stack/eb-construct/discovery-eventbus" [
+    dir = "both",
+  ];
+  "integ-stack/eb-construct/schema-created-sfn/schema-discovery" -> "integ-stack/eb-construct/schema-created-sfn/schema" [
+    dir = "both",
+  ];
+  "integ-stack/eb-construct/schema-version-created-sfn/schema-discovery" -> "integ-stack/eb-construct/discovery-eventbus" [
+    dir = "both",
+  ];
+  "integ-stack/eb-construct/schema-version-created-sfn/schema-discovery" -> "integ-stack/eb-construct/schema-version-created-sfn/schema" [
+    dir = "both",
+  ];
+  "integ-stack/eb-construct/event-discoverer" -> "integ-stack/eb-construct/discovery-eventbus" [
+    dir = "both",
+  ];
+  "integ-stack/eb-construct/discovery-archive/Archive" -> "integ-stack/eb-construct/discovery-eventbus" [
+    dir = "both",
+  ];
+}

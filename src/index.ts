@@ -34,7 +34,10 @@ export class EventBridgeDiscovery extends Construct {
     new Archive(this, 'discovery-archive', {
       sourceEventBus: this.eventBus,
       retention: Duration.days(7),
-      eventPattern: { source: ['modelbroker.logs'] },
+      eventPattern: {
+        source: ['s3'],
+        detailType: ['modelbroker.logs'],
+      },
     });
 
     const s3ToEventBusLambda = new DockerImageFunction(this, 's3-to-eventbus', {
