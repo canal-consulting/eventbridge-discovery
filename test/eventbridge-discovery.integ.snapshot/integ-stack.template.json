@@ -196,6 +196,23 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete"
   },
+  "ebconstructdiscoveryarchiveArchiveD2662AAF": {
+   "Type": "AWS::Events::Archive",
+   "Properties": {
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "ebconstructdiscoveryeventbusB9023A1D",
+      "Arn"
+     ]
+    },
+    "EventPattern": {
+     "source": [
+      "modelbroker.logs"
+     ]
+    },
+    "RetentionDays": 0
+   }
+  },
   "ebconstructs3toeventbusServiceRoleC4D4DE12": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -232,11 +249,6 @@
    "Properties": {
     "PolicyDocument": {
      "Statement": [
-      {
-       "Action": "s3-object-lambda:WriteGetObjectResponse",
-       "Effect": "Allow",
-       "Resource": "*"
-      },
       {
        "Action": "events:PutEvents",
        "Effect": "Allow",
@@ -293,7 +305,7 @@
    "Properties": {
     "Code": {
      "ImageUri": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:c69d2aff27aafd015d9ddb19e810847c28a42d376fa12af739618976c0a43443"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:ec7b127697738c1c4be2eaef43040918b82da35521d7c970338f03a7b080d0b5"
      }
     },
     "Role": {
@@ -318,50 +330,6 @@
     "ebconstructs3toeventbusServiceRoleDefaultPolicy45945E87",
     "ebconstructs3toeventbusServiceRoleC4D4DE12"
    ]
-  },
-  "ebconstructs3lambdaaccesspointSupportingAccessPointC06C1397": {
-   "Type": "AWS::S3::AccessPoint",
-   "Properties": {
-    "Bucket": {
-     "Ref": "ebconstructeventbucket20E62FBC"
-    }
-   }
-  },
-  "ebconstructs3lambdaaccesspoint1B9773AD": {
-   "Type": "AWS::S3ObjectLambda::AccessPoint",
-   "Properties": {
-    "ObjectLambdaConfiguration": {
-     "AllowedFeatures": [
-      "GetObject-PartNumber",
-      "GetObject-Range"
-     ],
-     "CloudWatchMetricsEnabled": true,
-     "SupportingAccessPoint": {
-      "Fn::GetAtt": [
-       "ebconstructs3lambdaaccesspointSupportingAccessPointC06C1397",
-       "Arn"
-      ]
-     },
-     "TransformationConfigurations": [
-      {
-       "Actions": [
-        "GetObject"
-       ],
-       "ContentTransformation": {
-        "AwsLambda": {
-         "FunctionArn": {
-          "Fn::GetAtt": [
-           "ebconstructs3toeventbus54F751E9",
-           "Arn"
-          ]
-         },
-         "FunctionPayload": "{\"prop\":\"value\"}"
-        }
-       }
-      }
-     ]
-    }
-   }
   },
   "ebconstructeventdiscoverer597D84FC": {
    "Type": "AWS::EventSchemas::Discoverer",

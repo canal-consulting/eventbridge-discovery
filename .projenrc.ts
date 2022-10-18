@@ -7,11 +7,7 @@ const projenVersion = 'v0.63.23';
 const constructsVersion = '10.1.131';
 const nodejsVersion = 'v16.17.1';
 const commonIgnore = ['.idea', '.Rproj', '.vscode', 'cdk.context.json', '.DS_Store', 'data/events/', 'poetry.lock'];
-const deps = [
-  `aws-cdk-lib@${cdkVersion}`,
-  `constructs@${constructsVersion}`,
-  `@aws-cdk/aws-s3objectlambda-alpha@${cdkVersion}-alpha.0`,
-];
+const deps = [`aws-cdk-lib@${cdkVersion}`, `constructs@${constructsVersion}`];
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Bryan Galvin',

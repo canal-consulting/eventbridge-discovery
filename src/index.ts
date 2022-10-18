@@ -1,7 +1,6 @@
 import * as path from 'path';
-import { AccessPoint } from '@aws-cdk/aws-s3objectlambda-alpha';
 import { CfnOutput, Duration, RemovalPolicy } from 'aws-cdk-lib';
-import { EventBus } from 'aws-cdk-lib/aws-events';
+import { Archive, EventBus } from 'aws-cdk-lib/aws-events';
 import { CfnDiscoverer } from 'aws-cdk-lib/aws-eventschemas';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import { BlockPublicAccess, Bucket, BucketEncryption } from 'aws-cdk-lib/aws-s3';
@@ -30,6 +29,11 @@ export class EventBridgeDiscovery extends Construct {
 
     this.eventBus.applyRemovalPolicy(RemovalPolicy.DESTROY);
 
+    new Archive(this, 'discovery-archive', {
+      sourceEventBus: this.eventBus,
+      eventPattern: { source: ['modelbroker.logs'] },
+    });
+
     const s3ToEventBusLambda = new lambda.DockerImageFunction(this, 's3-to-eventbus', {
       code: lambda.DockerImageCode.fromImageAsset(path.join(__dirname, './lambdas/s3-to-eventbus')),
       timeout: Duration.seconds(60),
@@ -37,17 +41,8 @@ export class EventBridgeDiscovery extends Construct {
       description: 's3 to eventbus schema',
       environment: {
         EVENT_BUS: this.eventBus.eventBusName,
-      },
-    });
-
-    new AccessPoint(this, 's3-lambda-access-point', {
-      bucket: this.eventBucket,
-      handler: s3ToEventBusLambda,
-      cloudWatchMetricsEnabled: true,
-      supportsGetObjectPartNumber: true,
-      supportsGetObjectRange: true,
-      payload: {
-        prop: 'value',
+        DETAIL_TYPE: 'modelbroker.logs',
+        SOURCE: 's3',
       },
     });
 

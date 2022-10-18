@@ -10,6 +10,8 @@ from aws_lambda_powertools.utilities.data_classes import event_source, S3Event
 from aws_lambda_powertools.utilities.typing import LambdaContext
 
 EVENT_BUS = os.environ.get("EVENT_BUS")
+DETAIL_TYPE = os.environ.get("DETAIL_TYPE", "modelbroker.logs")
+SOURCE = os.environ.get("SOURCE", "s3")
 
 logger = Logger()
 tracer = Tracer()
@@ -22,7 +24,7 @@ def send_events(events: List):
 	"""
 	Send events to EventBridge
 	"""
-	
+
 	logger.info("Sending %d events to EventBridge", len(events))
 	for i in range(0, len(events), 10):
 		eventbridge.put_events(Entries=events[i: i + 10])
@@ -36,7 +38,7 @@ def lambda_handler(event: S3Event, context: LambdaContext):
 	for record in event.records:
 		object_key = unquote_plus(record.s3.get_object.key)
 		logger.info(f"Processing {bucket_name}/{object_key}")
-		events = s3_to_events(bucket_name, record, EVENT_BUS, "s3.logs")
+		events = s3_to_events(bucket_name, record, EVENT_BUS)
 		if len(events) > 0:
 			send_events(events)
 
@@ -45,19 +47,18 @@ def s3_to_events(
 		s3_bucket: str,
 		s3_record: S3Event.record,
 		event_bus_name: str,
-		source: str,
 		) -> List[Dict]:
-	
+
 	object_key = unquote_plus(s3_record.s3.get_object.key)
 	raw_object = s3.get_object(Bucket=s3_bucket, Key=object_key)
 	raw_data = json.loads(raw_object["Body"].read().decode("utf-8"))
 	return [
 		{
 			"Time": datetime.now(),
-			"Source": source,
+			"Source": SOURCE,
 			"Resources": [s3_record.s3.get_object.key],
 			"EventBusName": event_bus_name,
-			"DetailType": "model-broker",
+			"DetailType": DETAIL_TYPE
 			"Detail": json.dumps(item),
 			}
 		for item in raw_data
