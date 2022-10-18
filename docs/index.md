@@ -1,4 +1,5 @@
 # Eventbridge Discovery
 
-![alt text](diagram.png "Title")
+![diagram](diagram.png "Infra")
 
+![flow](flow.png "Flow")
