@@ -425,6 +425,9 @@
      ],
      "detail-type": [
       "Schema Created"
+     ],
+     "resources": [
+      "arn:aws:schemas:us-west-2:570405429484:schema/discovered-schemas/s3@Modelbroker.logs"
      ]
     },
     "State": "ENABLED",
@@ -533,6 +536,9 @@
      ],
      "detail-type": [
       "Schema Version Created"
+     ],
+     "resources": [
+      "arn:aws:schemas:us-west-2:570405429484:schema/discovered-schemas/s3@Modelbroker.logs"
      ]
     },
     "State": "ENABLED",

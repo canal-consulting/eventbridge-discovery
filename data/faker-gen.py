@@ -33,7 +33,7 @@ def gen_data(fields: List[str], num_records: int) -> List[Dict]:
 
 
 if __name__ == "__main__":
-    for i in range(3):
+    for i in range(5):
         directory = f"./events/schema-{i}"
         os.makedirs(
             directory,

@@ -56,10 +56,6 @@ export class EventBridgeDiscovery extends Construct {
     this.eventBucket.addObjectCreatedNotification(new LambdaDestination(s3ToEventBusLambda));
     this.eventBucket.grantRead(s3ToEventBusLambda);
 
-    new EventBridgeSfn(this, 'schema-created-sfn', {
-      detailType: EventBridgeTypes.SchemaCreated,
-    });
-
     new EventBridgeSfn(this, 'schema-version-created-sfn', {
       detailType: EventBridgeTypes.SchemaVersionCreated,
     });
