@@ -305,7 +305,7 @@
    "Properties": {
     "Code": {
      "ImageUri": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:ec7b127697738c1c4be2eaef43040918b82da35521d7c970338f03a7b080d0b5"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:2285ecb8e3e715ea18427d66616525cde75c03e1feb44f19bdcd11f252914aa1"
      }
     },
     "Role": {
@@ -319,7 +319,9 @@
      "Variables": {
       "EVENT_BUS": {
        "Ref": "ebconstructdiscoveryeventbusB9023A1D"
-      }
+      },
+      "DETAIL_TYPE": "modelbroker.logs",
+      "SOURCE": "s3"
      }
     },
     "MemorySize": 512,
@@ -330,6 +332,228 @@
     "ebconstructs3toeventbusServiceRoleDefaultPolicy45945E87",
     "ebconstructs3toeventbusServiceRoleC4D4DE12"
    ]
+  },
+  "ebconstructschemacreatedsfnreminderRole3FDAAEC7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": {
+         "Fn::FindInMap": [
+          "ServiceprincipalMap",
+          {
+           "Ref": "AWS::Region"
+          },
+          "states"
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ebconstructschemacreatedsfnreminder887D855E": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "ebconstructschemacreatedsfnreminderRole3FDAAEC7",
+      "Arn"
+     ]
+    },
+    "DefinitionString": "{\"StartAt\":\"waitUntil\",\"States\":{\"waitUntil\":{\"Type\":\"Wait\",\"TimestampPath\":\"$.detail.at\",\"Next\":\"pass\"},\"pass\":{\"Type\":\"Pass\",\"End\":true}},\"TimeoutSeconds\":7776000}"
+   },
+   "DependsOn": [
+    "ebconstructschemacreatedsfnreminderRole3FDAAEC7"
+   ]
+  },
+  "ebconstructschemacreatedsfnreminderEventsRole3A6A5895": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ebconstructschemacreatedsfnreminderEventsRoleDefaultPolicyF1BE916F": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "states:StartExecution",
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "ebconstructschemacreatedsfnreminder887D855E"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ebconstructschemacreatedsfnreminderEventsRoleDefaultPolicyF1BE916F",
+    "Roles": [
+     {
+      "Ref": "ebconstructschemacreatedsfnreminderEventsRole3A6A5895"
+     }
+    ]
+   }
+  },
+  "ebconstructschemacreatedsfnstartReminder5E00A70A": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "EventBusName": {
+     "Ref": "ebconstructdiscoveryeventbusB9023A1D"
+    },
+    "EventPattern": {
+     "source": [
+      "aws.schemas"
+     ],
+     "detail-type": [
+      "Schema Created"
+     ]
+    },
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": {
+       "Ref": "ebconstructschemacreatedsfnreminder887D855E"
+      },
+      "Id": "Target0",
+      "RoleArn": {
+       "Fn::GetAtt": [
+        "ebconstructschemacreatedsfnreminderEventsRole3A6A5895",
+        "Arn"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "ebconstructschemaversioncreatedsfnreminderRole27045430": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": {
+         "Fn::FindInMap": [
+          "ServiceprincipalMap",
+          {
+           "Ref": "AWS::Region"
+          },
+          "states"
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ebconstructschemaversioncreatedsfnreminder5921F25D": {
+   "Type": "AWS::StepFunctions::StateMachine",
+   "Properties": {
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "ebconstructschemaversioncreatedsfnreminderRole27045430",
+      "Arn"
+     ]
+    },
+    "DefinitionString": "{\"StartAt\":\"waitUntil\",\"States\":{\"waitUntil\":{\"Type\":\"Wait\",\"TimestampPath\":\"$.detail.at\",\"Next\":\"pass\"},\"pass\":{\"Type\":\"Pass\",\"End\":true}},\"TimeoutSeconds\":7776000}"
+   },
+   "DependsOn": [
+    "ebconstructschemaversioncreatedsfnreminderRole27045430"
+   ]
+  },
+  "ebconstructschemaversioncreatedsfnreminderEventsRole3B145D61": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "ebconstructschemaversioncreatedsfnreminderEventsRoleDefaultPolicy590E0F5D": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "states:StartExecution",
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "ebconstructschemaversioncreatedsfnreminder5921F25D"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ebconstructschemaversioncreatedsfnreminderEventsRoleDefaultPolicy590E0F5D",
+    "Roles": [
+     {
+      "Ref": "ebconstructschemaversioncreatedsfnreminderEventsRole3B145D61"
+     }
+    ]
+   }
+  },
+  "ebconstructschemaversioncreatedsfnstartReminder4F168039": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "EventBusName": {
+     "Ref": "ebconstructdiscoveryeventbusB9023A1D"
+    },
+    "EventPattern": {
+     "source": [
+      "aws.schemas"
+     ],
+     "detail-type": [
+      "Schema Version Created"
+     ]
+    },
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": {
+       "Ref": "ebconstructschemaversioncreatedsfnreminder5921F25D"
+      },
+      "Id": "Target0",
+      "RoleArn": {
+       "Fn::GetAtt": [
+        "ebconstructschemaversioncreatedsfnreminderEventsRole3B145D61",
+        "Arn"
+       ]
+      }
+     }
+    ]
+   }
   },
   "ebconstructeventdiscoverer597D84FC": {
    "Type": "AWS::EventSchemas::Discoverer",
@@ -485,6 +709,100 @@
   "ebconstructeventbusname57238BDE": {
    "Value": {
     "Ref": "ebconstructdiscoveryeventbusB9023A1D"
+   }
+  }
+ },
+ "Mappings": {
+  "ServiceprincipalMap": {
+   "af-south-1": {
+    "states": "states.af-south-1.amazonaws.com"
+   },
+   "ap-east-1": {
+    "states": "states.ap-east-1.amazonaws.com"
+   },
+   "ap-northeast-1": {
+    "states": "states.ap-northeast-1.amazonaws.com"
+   },
+   "ap-northeast-2": {
+    "states": "states.ap-northeast-2.amazonaws.com"
+   },
+   "ap-northeast-3": {
+    "states": "states.ap-northeast-3.amazonaws.com"
+   },
+   "ap-south-1": {
+    "states": "states.ap-south-1.amazonaws.com"
+   },
+   "ap-southeast-1": {
+    "states": "states.ap-southeast-1.amazonaws.com"
+   },
+   "ap-southeast-2": {
+    "states": "states.ap-southeast-2.amazonaws.com"
+   },
+   "ap-southeast-3": {
+    "states": "states.ap-southeast-3.amazonaws.com"
+   },
+   "ca-central-1": {
+    "states": "states.ca-central-1.amazonaws.com"
+   },
+   "cn-north-1": {
+    "states": "states.cn-north-1.amazonaws.com"
+   },
+   "cn-northwest-1": {
+    "states": "states.cn-northwest-1.amazonaws.com"
+   },
+   "eu-central-1": {
+    "states": "states.eu-central-1.amazonaws.com"
+   },
+   "eu-north-1": {
+    "states": "states.eu-north-1.amazonaws.com"
+   },
+   "eu-south-1": {
+    "states": "states.eu-south-1.amazonaws.com"
+   },
+   "eu-south-2": {
+    "states": "states.eu-south-2.amazonaws.com"
+   },
+   "eu-west-1": {
+    "states": "states.eu-west-1.amazonaws.com"
+   },
+   "eu-west-2": {
+    "states": "states.eu-west-2.amazonaws.com"
+   },
+   "eu-west-3": {
+    "states": "states.eu-west-3.amazonaws.com"
+   },
+   "me-south-1": {
+    "states": "states.me-south-1.amazonaws.com"
+   },
+   "sa-east-1": {
+    "states": "states.sa-east-1.amazonaws.com"
+   },
+   "us-east-1": {
+    "states": "states.us-east-1.amazonaws.com"
+   },
+   "us-east-2": {
+    "states": "states.us-east-2.amazonaws.com"
+   },
+   "us-gov-east-1": {
+    "states": "states.us-gov-east-1.amazonaws.com"
+   },
+   "us-gov-west-1": {
+    "states": "states.us-gov-west-1.amazonaws.com"
+   },
+   "us-iso-east-1": {
+    "states": "states.amazonaws.com"
+   },
+   "us-iso-west-1": {
+    "states": "states.amazonaws.com"
+   },
+   "us-isob-east-1": {
+    "states": "states.amazonaws.com"
+   },
+   "us-west-1": {
+    "states": "states.us-west-1.amazonaws.com"
+   },
+   "us-west-2": {
+    "states": "states.us-west-2.amazonaws.com"
    }
   }
  },

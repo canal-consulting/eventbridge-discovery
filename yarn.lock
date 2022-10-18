@@ -10,11 +10,6 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@aws-cdk/aws-s3objectlambda-alpha@2.46.0-alpha.0":
-  version "2.46.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-s3objectlambda-alpha/-/aws-s3objectlambda-alpha-2.46.0-alpha.0.tgz#57ee12d08108af6d9d5e72ed17da4912875fea2d"
-  integrity sha512-6dgqWT5d+A2EfQ+dhZveOj1EE0EihjeDOSy2SK8em947naWKwOczyyOXxJfAEoloIvwt3WTHfG+BJjMX1lt7fQ==
-
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.18.6":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.18.6.tgz#3b25d38c89600baa2dcc219edfa88a74eb2c427a"
@@ -3627,10 +3622,10 @@ jsii-diff@^1.69.0:
     log4js "^6.6.1"
     yargs "^16.2.0"
 
-jsii-docgen@^7.0.117:
-  version "7.0.117"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-7.0.117.tgz#ab0160ab518c68bc79c7d9693d40135b3a74cb6c"
-  integrity sha512-w6Sdrf18TeMf7wh7bB1QP7vbAOsHgE2pOSPoeBdkvAupm1Z66k1e0OZ70hmHjIMKJiUk5shEbrLaggwdYAavOw==
+jsii-docgen@^7.0.118:
+  version "7.0.118"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-7.0.118.tgz#58b6c66c1cf8f188082a3397991bc2e599f1d5fb"
+  integrity sha512-sPUX7aYve1LL96t91OXCiVk9DnotPhAPM10ifY/48m6PW0+0JFHDyd0krr6Lo6R0UrHNPb/Jo0skN3zdSncR0Q==
   dependencies:
     "@jsii/spec" "^1.69.0"
     case "^1.6.3"
