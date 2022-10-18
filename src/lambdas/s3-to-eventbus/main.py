@@ -24,7 +24,7 @@ def send_events(events: List):
 	"""
 	Send events to EventBridge
 	"""
-
+	
 	logger.info("Sending %d events to EventBridge", len(events))
 	for i in range(0, len(events), 10):
 		eventbridge.put_events(Entries=events[i: i + 10])
@@ -48,7 +48,7 @@ def s3_to_events(
 		s3_record: S3Event.record,
 		event_bus_name: str,
 		) -> List[Dict]:
-
+	
 	object_key = unquote_plus(s3_record.s3.get_object.key)
 	raw_object = s3.get_object(Bucket=s3_bucket, Key=object_key)
 	raw_data = json.loads(raw_object["Body"].read().decode("utf-8"))
@@ -58,7 +58,7 @@ def s3_to_events(
 			"Source": SOURCE,
 			"Resources": [s3_record.s3.get_object.key],
 			"EventBusName": event_bus_name,
-			"DetailType": DETAIL_TYPE
+			"DetailType": DETAIL_TYPE,
 			"Detail": json.dumps(item),
 			}
 		for item in raw_data
