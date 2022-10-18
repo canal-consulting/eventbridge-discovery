@@ -207,6 +207,9 @@
     },
     "EventPattern": {
      "source": [
+      "s3"
+     ],
+     "detail-type": [
       "modelbroker.logs"
      ]
     },
@@ -416,9 +419,6 @@
   "ebconstructschemacreatedsfnschemadiscoveryA9B7A8CD": {
    "Type": "AWS::Events::Rule",
    "Properties": {
-    "EventBusName": {
-     "Ref": "ebconstructdiscoveryeventbusB9023A1D"
-    },
     "EventPattern": {
      "source": [
       "aws.schemas"
@@ -527,9 +527,6 @@
   "ebconstructschemaversioncreatedsfnschemadiscoveryD4E1A09D": {
    "Type": "AWS::Events::Rule",
    "Properties": {
-    "EventBusName": {
-     "Ref": "ebconstructdiscoveryeventbusB9023A1D"
-    },
     "EventPattern": {
      "source": [
       "aws.schemas"

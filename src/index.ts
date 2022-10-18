@@ -57,12 +57,10 @@ export class EventBridgeDiscovery extends Construct {
     this.eventBucket.grantRead(s3ToEventBusLambda);
 
     new EventBridgeSfn(this, 'schema-created-sfn', {
-      eventBus: this.eventBus,
       detailType: EventBridgeTypes.SchemaCreated,
     });
 
     new EventBridgeSfn(this, 'schema-version-created-sfn', {
-      eventBus: this.eventBus,
       detailType: EventBridgeTypes.SchemaVersionCreated,
     });
 
